@@ -1,0 +1,30 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: gen-policy-generator-eso
+policyDefaults:
+  namespace: acm-install-policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - install-eso
+placementBindingDefaults:
+  name: "eso-binding"
+
+policies:
+  # Logging Policies - start
+  - name: install-eso 
+    manifests:
+      - path: config/policy-install-eso.yaml
+  # Logging Policies - e
+  # ESO Instance policy - start
+  - name: external-secrets-operator-instance
+    manifests:
+      - path: external-secrets-operator/instance/policy-instance.yaml
+  # ESO Instance policy - end
+
+policySets:
+  - name: install-eso
+    placement:
+      placementPath: placements/all-placement.yaml
