@@ -22,6 +22,12 @@ policies:
   - name: external-secrets-operator-instance
     manifests:
       - path: external-secrets-operator/instance/policy-instance.yaml
+  - name: externalsecrets
+    manifests:
+      - path: externalsecrets/policy-externalsecret-app.yaml
+      - path: externalsecrets/policy-externalsecret-db.yaml
+      - path: externalsecrets/policy-secretstore-app.yaml
+      - path: externalsecrets/policy-secretstore-db.yaml
   # ESO Instance policy - end
 
 policySets:
