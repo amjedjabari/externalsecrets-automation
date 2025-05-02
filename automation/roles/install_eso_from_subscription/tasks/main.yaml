@@ -51,3 +51,31 @@
         namespace: openshift-logging ##Openshift namespace where the secret going to be created in
         annotations:
           eks.amazonaws.com/role-arn: arn:aws:iam::{{ aws_account_id }}:role/{{ aws_iam_role_name }}  ##AWS ESO_ROLE_ARN
+
+- name: create service account
+  k8s:
+    host: "https://api.{{ cluster_address }}:443"
+    api_key: "{{ sa_token }}"
+    state: "{{ state }}"
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: external-secrets-sa
+        namespace: app-secret ##Openshift namespace where the secret going to be created in
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::{{ aws_account_id }}:role/{{ aws_iam_role_name }}  ##AWS ESO_ROLE_ARN          
+
+- name: create service account
+  k8s:
+    host: "https://api.{{ cluster_address }}:443"
+    api_key: "{{ sa_token }}"
+    state: "{{ state }}"
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: external-secrets-sa
+        namespace: db-secret ##Openshift namespace where the secret going to be created in
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::{{ aws_account_id }}:role/{{ aws_iam_role_name }}  ##AWS ESO_ROLE_ARN                   
